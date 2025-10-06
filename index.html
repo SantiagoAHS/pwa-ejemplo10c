@@ -21,7 +21,7 @@
     <!-- Registrar el Servicesworker -->
     <script>
         if ('serviceWorker' in navigator){
-            navigator.serviceWorker.register("pwa-ejemplo10c/pwa.js")
+            navigator.serviceWorker.register('/pwa-ejemplo10c/pwa.js')
                 .then(reg => console.log("Registro de SW exitoso", reg))
                 .catch(err => console.log("Registro de SW fallido", err));
         }

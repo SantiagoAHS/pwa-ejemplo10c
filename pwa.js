@@ -2,7 +2,7 @@
 
 //t.Nombre sw y los archivos a cachear
 const CACHE_NAME= "mi-cache";
-const BASE_PATH= "pwa-ejemplo10c/"; //Ajustar segun la ubicacion del proyecto
+const BASE_PATH= "/pwa-ejemplo10c/"; //Ajustar segun la ubicacion del proyecto
 const urlsToCache = [
     `${BASE_PATH}index.html`,
     `${BASE_PATH}style.css`,
@@ -30,7 +30,7 @@ self.addEventListener('install', event => {
 
 self.addEventListener('activate', event => {
     event.waitUntil(
-        cache.keys().then(keys =>
+        caches.keys().then(keys =>
             Promise.all(
                 keys.filter(key => key !== CACHE_NAME)
                 .map(key => caches.delete(key))
@@ -46,7 +46,7 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request).then(response => {
-            return response || fetch(event.request).catch(() => caches.match('/offline.html'));
+            return response || fetch(event.request).catch(() => caches.match(`${BASE_PATH}offline.html`));
         })
     );
 });
